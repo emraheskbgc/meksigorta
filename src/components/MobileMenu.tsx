@@ -70,9 +70,9 @@ export default function  MobileMenu({ items }: MobileMenuProps) {
             <Link
               href="/teklif-al"
               onClick={() => setIsOpen(false)}
-              className="block w-full text-center bg-blue-600 text-white px-5 py-4 rounded-full text-base font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
+              className="block w-full text-center bg-blue-600 text-white px-5 py-4 rounded-full text-base font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-900"
             >
-              Hızlı Teklif Al
+              Hızlı Teklif Al 
             </Link>
           </div>
         </div>
