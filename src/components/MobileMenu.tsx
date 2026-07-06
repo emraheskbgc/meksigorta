@@ -54,7 +54,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
 
       {/* AÇILAN PANEL */}
       {isOpen && (
-        <div className="fixed inset-x-0 top-20 bg-white border-t border-slate-100 px-4 pt-4 pb-8 space-y-4 shadow-xl z-50 min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        <div className="fixed inset-x-0 top-20 bg-white border-t border-slate-100 px-4 pt-4 pb-8 space-y-4 shadow-xl z-50 min-h-[calc(100vh-20px)] flex flex-col justify-start">
           {items.map((item) => (
             <Link
               key={item.href}
