@@ -26,9 +26,7 @@ export default function ContactForm() {
 
   const [loading, setLoading] = useState(false);
 
-  const [success, setSuccess] = useState(false);
-
-  const [error, setError] = useState("");
+ 
 
   // Kullanıcı inputta bir şey değiştirince çalışacak fonksiyon
   const handleChange = (
@@ -59,19 +57,70 @@ export default function ContactForm() {
     { value: "diger", label: "Diğer" },
   ];
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+// kullanıcı formu boş geçmemesi için 
+
+  const validateForm = () => {
+    if (!formData.fullName.trim()) {
+      return "Lütfen ad soyadınızı giriniz.";
+    }
+  
+    if (!formData.phone.trim()) {
+      return "Lütfen telefon numaranızı giriniz.";
+    }
+  
+    if (!formData.privacyAccepted) {
+      return "KVKK onayını kabul etmelisiniz.";
+    }
+  
+    return null;
+  };
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  
+    const validationError = validateForm();
+  
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+  
+    try {
+      setLoading(true);
+  
+      const res = await fetch("/api/contact", {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body:JSON.stringify(formData),
+      });
 
-    console.log(formData);
+      const result = await res.json();
 
-    setTimeout(() => {
+      if (!res.ok || !result.success) {
+        throw new Error(result.message);
+      }
+
+      toast.success(result.message);
+  
+      setFormData({
+        fullName: "",
+        phone: "",
+        tcIdentity: "",
+        email: "",
+        insuranceType: "",
+        birthDate: "",
+        message: "",
+        privacyAccepted: false,
+      });
+    } catch (error) {
+      toast.error("Bir hata oluştu.");
+    } finally {
       setLoading(false);
-
-      setSuccess(true);
-    }, 2000);
+    }
   };
 
   return (
@@ -170,16 +219,11 @@ export default function ContactForm() {
               </div>
 
               <div className="md:col-span-2">
-                {success && (
-                  toast.success("Talebiniz başarıyla gönderildi.")
-                )}
-                {error && (
-                 toast.error("Mail gönderilemedi.")
-                )}
+                
                 <SubmitButton loading={loading}>Teklif Al</SubmitButton>
               </div>
             </div>
-          </form>ß
+          </form>
         </div>
       </div>
     </section>

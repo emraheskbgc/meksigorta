@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${geistSans.variable} font-sans antialiased  min-h-screen  flex flex-col`}>
-      <Toaster richColors position="top-right" />
+      
         
         {/* Navbar burada sabit */}
         <Navbar />
@@ -43,6 +43,10 @@ export default function RootLayout({
         
         {/* Footer burada sabit */}
         <Footer/>
+
+
+
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );
