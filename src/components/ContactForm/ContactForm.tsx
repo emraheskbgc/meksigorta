@@ -12,7 +12,11 @@ import { toast } from "sonner";
 
 import type { ContactFormData } from "@/types/contact";
 
-export default function ContactForm() {
+interface ContactFormProps {
+  variant?: "offer" | "contact";
+}
+
+export default function ContactForm({ variant = "offer" }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: "",
     phone: "",
@@ -25,8 +29,6 @@ export default function ContactForm() {
   });
 
   const [loading, setLoading] = useState(false);
-
- 
 
   // Kullanıcı inputta bir şey değiştirince çalışacak fonksiyon
   const handleChange = (
@@ -57,45 +59,43 @@ export default function ContactForm() {
     { value: "diger", label: "Diğer" },
   ];
 
-// kullanıcı formu boş geçmemesi için 
+  // kullanıcı formu boş geçmemesi için
 
   const validateForm = () => {
     if (!formData.fullName.trim()) {
       return "Lütfen ad soyadınızı giriniz.";
     }
-  
+
     if (!formData.phone.trim()) {
       return "Lütfen telefon numaranızı giriniz.";
     }
-  
+
     if (!formData.privacyAccepted) {
       return "KVKK onayını kabul etmelisiniz.";
     }
-  
+
     return null;
   };
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     const validationError = validateForm();
-  
+
     if (validationError) {
       toast.error(validationError);
       return;
-    }   
-  
+    }
+
     try {
       setLoading(true);
-      
+
       const res = await fetch("/api/contact", {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify(formData),
+        body: JSON.stringify(formData),
       });
 
       const result = await res.json();
@@ -105,7 +105,7 @@ export default function ContactForm() {
       }
 
       toast.success(result.message);
-  
+
       setFormData({
         fullName: "",
         phone: "",
@@ -124,108 +124,97 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="bg-backColor py-16">
-      <div className="container mx-auto max-w-5xl px-4">
-        <div className="rounded-3xl bg-white p-8 shadow-xl">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold text-text1">Hızlı Teklif Al</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <ContactInput
+          id="fullName"
+          name="fullName"
+          label="Ad Soyad"
+          placeholder="Ad Soyad"
+          required
+          value={formData.fullName}
+          onChange={handleChange}
+        />
 
-            <p className="mt-3 text-text2">
-              Formu doldurun, uzman ekibimiz en kısa sürede sizinle iletişime
-              geçsin.
-            </p>
-          </div>
+        <ContactInput
+          id="phone"
+          name="phone"
+          label="Telefon"
+          type="tel"
+          placeholder="05xx xxx xx xx"
+          required
+          value={formData.phone}
+          onChange={handleChange}
+        />
 
-          <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <ContactInput
-                id="fullName"
-                name="fullName"
-                label="Ad Soyad"
-                placeholder="Ad Soyad"
-                required
-                value={formData.fullName}
-                onChange={handleChange}
-              />
+        {variant === "offer" && (
+          <ContactInput
+            id="tcIdentity"
+            name="tcIdentity"
+            label="T.C. Kimlik No"
+            placeholder="11 haneli T.C. Kimlik Numaranız"
+            value={formData.tcIdentity}
+            onChange={handleChange}
+          />
+        )}
 
-              <ContactInput
-                id="phone"
-                name="phone"
-                label="Telefon"
-                type="tel"
-                placeholder="05xx xxx xx xx"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-              />
+        <ContactInput
+          id="email"
+          name="email"
+          label="E-Posta"
+          type="email"
+          placeholder="ornek@mail.com"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        {variant === "offer" && (
+          <ContactInput
+            id="birthDate"
+            name="birthDate"
+            label="Doğum Tarihi"
+            type="date"
+            value={formData.birthDate}
+            onChange={handleChange}
+          />
+        )}
 
-              <ContactInput
-                id="tcIdentity"
-                name="tcIdentity"
-                label="T.C. Kimlik No"
-                placeholder="11 haneli T.C. Kimlik Numaranız"
-                value={formData.tcIdentity}
-                onChange={handleChange}
-              />
+        {variant === "offer" && (
+          <ContactSelect
+            id="insuranceType"
+            name="insuranceType"
+            label="Sigorta Ürünü"
+            value={formData.insuranceType}
+            options={insuranceOptions}
+            onChange={handleChange}
+          />
+        )}
 
-              <ContactInput
-                id="email"
-                name="email"
-                label="E-Posta"
-                type="email"
-                placeholder="ornek@mail.com"
-                value={formData.email}
-                onChange={handleChange}
-              />
+        <div className="md:col-span-2">
+          <ContactTextarea
+            id="message"
+            name="message"
+            label="Mesaj"
+            placeholder="Mesajınızı yazabilirsiniz..."
+            value={formData.message}
+            onChange={handleChange}
+          />
+        </div>
 
-              <ContactInput
-                id="birthDate"
-                name="birthDate"
-                label="Doğum Tarihi"
-                type="date"
-                value={formData.birthDate}
-                onChange={handleChange}
-              />
+        <div className="md:col-span-2">
+          <ContactCheckbox
+            id="privacyAccepted"
+            name="privacyAccepted"
+            checked={formData.privacyAccepted}
+            onChange={handleChange}
+            required
+            label="Kişisel verilerimin KVKK kapsamında işlenmesini kabul ediyorum."
+          />
+        </div>
 
-              <ContactSelect
-                id="insuranceType"
-                name="insuranceType"
-                label="Sigorta Ürünü"
-                value={formData.insuranceType}
-                options={insuranceOptions}
-                onChange={handleChange}
-              />
-
-              <div className="md:col-span-2">
-                <ContactTextarea
-                  id="message"
-                  name="message"
-                  label="Mesaj"
-                  placeholder="Mesajınızı yazabilirsiniz..."
-                  value={formData.message}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <ContactCheckbox
-                  id="privacyAccepted"
-                  name="privacyAccepted"
-                  checked={formData.privacyAccepted}
-                  onChange={handleChange}
-                  required
-                  label="Kişisel verilerimin KVKK kapsamında işlenmesini kabul ediyorum."
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                
-                <SubmitButton loading={loading}>Teklif Al</SubmitButton>
-              </div>
-            </div>
-          </form>
+        <div className="md:col-span-2">
+          <SubmitButton loading={loading}>Teklif Al</SubmitButton>
         </div>
       </div>
-    </section>
+    </form>
   );
 }

@@ -23,13 +23,12 @@ export default function HomeSection2() {
                 height={1000}
                 className="w-full h-auto rounded-3xl object-cover"
               />
-
             </div>
             <p className="text-xl font-bold text-center mt-5  text-text1 ">
-                Tüm Sigorta Ürünlerinde
-                <span className="ml-1 text-accent">En Uygun </span>
-                Fiyat Fırsatı
-              </p>
+              Tüm Sigorta Ürünlerinde
+              <span className="ml-1 text-accent">En Uygun </span>
+              Fiyat Fırsatı
+            </p>
             <div className="mt-8 grid grid-cols-2 gap-5">
               <div className="flex items-center gap-3 rounded-2xl bg-white p-5 shadow-md">
                 <ShieldCheck className="h-10 w-10 text-accent" />
@@ -79,9 +78,24 @@ export default function HomeSection2() {
             </div>
           </div>
           {/*Sağ tarafa koyulcak iletişim formu */}
-          <div>
-            <ContactForm />
-          </div>
+          <section className="bg-backColor py-20">
+            <div className="container mx-auto max-w-5xl px-4">
+              <div className="rounded-3xl bg-white p-8 shadow-xl">
+                <div className="mb-8 text-center">
+                  <h2 className="mt-3 text-4xl font-bold text-text1">
+                    Hızlı Teklif Alın
+                  </h2>
+
+                  <p className="mt-4 text-lg text-text2">
+                    Formu doldurun, uzman ekibimiz en kısa sürede sizinle
+                    iletişime geçsin.
+                  </p>
+                </div>
+
+                <ContactForm variant="offer" />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>

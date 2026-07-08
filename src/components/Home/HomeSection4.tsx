@@ -9,7 +9,7 @@ export default function HomeSection4() {
 
           {/* Sol Taraf */}
           <div>
-            <span className="text-sm font-bold uppercase tracking-[3px] text-accent">
+            <span className="text-sm font-bold uppercase tracking-[3px] underline underline-offset-5  text-secondary">
               BİZE ULAŞIN
             </span>
 
@@ -28,17 +28,17 @@ export default function HomeSection4() {
             <div className="mt-10 space-y-5">
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="text-accent" />
-                <span className="text-amber-600">Ücretsiz Danışmanlık</span>
+                <span className="text-text3">Ücretsiz Danışmanlık</span>
               </div>
 
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="text-accent" />
-                <span className="text-amber-600">Hızlı Teklif Hazırlama</span>
+                <span className="text-text3">Hızlı Teklif Hazırlama</span>
               </div>
 
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="text-accent" />
-                <span className="text-amber-600">Aynı Gün Geri Dönüş</span>
+                <span className="text-text3">Aynı Gün Geri Dönüş</span>
               </div>
             </div>
           </div>
