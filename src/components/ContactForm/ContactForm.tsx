@@ -85,11 +85,11 @@ export default function ContactForm() {
     if (validationError) {
       toast.error(validationError);
       return;
-    }
+    }   
   
     try {
       setLoading(true);
-  
+      
       const res = await fetch("/api/contact", {
         method:"POST",
         headers:{
