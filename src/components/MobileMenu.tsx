@@ -10,7 +10,9 @@ interface MobileMenuProps {
 
 export default function  MobileMenu({ items }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  }
   return (
     <div className="flex md:hidden items-center">
       {/* HAMBURGER / KAPATMA BUTONU */}
@@ -21,35 +23,15 @@ export default function  MobileMenu({ items }: MobileMenuProps) {
         className="text-slate-600 hover:text-blue-600 p-3 focus:outline-none z-50 cursor-pointer select-none touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Menüyü Aç/Kapat"
       >
-        {isOpen ? (
-          <svg
-            className="h-7 w-7 pointer-events-none"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        ) : (
-          <svg
-            className="h-7 w-7 pointer-events-none"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        )}
+        <div className="  md:hidden hamburger-wrapper" onClick={toggleMenu}>
+        <div className={`hamburger-icon ${isOpen === true ? 'active' : ''}`}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+            
+      </div>
       </button>
 
       {/* AÇILAN PANEL */}
