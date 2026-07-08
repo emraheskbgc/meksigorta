@@ -21,7 +21,12 @@ export default function HomeSection3() {
           </p>
         </div>
         <div className="mt-14">
-          <div className="mt-16 space-y-6">
+          <div className="mt-16 space-y-6 relative overflow-hidden">
+            {/* Sol fade */}
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-6 bg-gradient-to-r from-white to-transparent" />
+
+            {/* Sağ fade */}
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-6 bg-gradient-to-l from-white to-transparent" />
             <LogoRow logos={logos} />
 
             <LogoRow logos={logos} reverse />

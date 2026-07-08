@@ -68,3 +68,71 @@ body {
 .animate-logo-right {
   animation: logo-right 80s linear infinite;
 }
+
+
+
+
+/* telefon animasyonu*/
+/* Telefon halkası */
+
+@keyframes phonePulse {
+  0% {
+    transform: scale(1);
+    opacity: .15;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: .35;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: .15;
+  }
+}
+
+.phone-ring-1{
+  animation: phonePulse 4s ease-in-out infinite;
+}
+
+.phone-ring-2{
+  animation: phonePulse 4s ease-in-out infinite;
+  animation-delay: .4s;
+}
+
+.phone-ring-3{
+  animation: phonePulse 4s ease-in-out infinite;
+  animation-delay: .8s;
+}
+
+
+/* Telefon ikonu */
+
+@keyframes phoneShake {
+
+  0%,85%,100%{
+    transform: rotate(0deg);
+  }
+
+  88%{
+    transform: rotate(-8deg);
+  }
+
+  91%{
+    transform: rotate(8deg);
+  }
+
+  94%{
+    transform: rotate(-5deg);
+  }
+
+  97%{
+    transform: rotate(5deg);
+  }
+
+}
+
+.phone-icon{
+  animation: phoneShake 6s ease-in-out infinite;
+}
