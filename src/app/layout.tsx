@@ -3,7 +3,9 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingWhatsapp from "@/components/Common/FloatingWhatsapp";
 import { Toaster } from "sonner";
+
 
 
 const geistSans = Geist({
@@ -40,7 +42,7 @@ export default function RootLayout({
         <main className="flex-grow  ">
           {children}
         </main>
-        
+        <FloatingWhatsapp/>
         {/* Footer burada sabit */}
         <Footer/>
 
