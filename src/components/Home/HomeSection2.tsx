@@ -9,7 +9,7 @@ export default function HomeSection2() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center  ">
           {/*SOL TARAFA KOYULCAK GÖRSEL */}
           <div className="relative  flex flex-col  h-full">
-            <div className="mb-8 mt-2 md:mt-12 text-center">
+            <div className="mb-6 mt-2 md:mt-12 text-center">
               <h2 className="text-4xl font-bold text-text1 leading-tight">
                 Hayatınızı
                 <span className="block text-accent">Güvence Altına Alın</span>
