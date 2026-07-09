@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { NavItem } from '@/types';
 import MobileMenu from './MobileMenu'; // Yeni bileşeni içe aktarıyoruz
+import Image from 'next/image';
 
 const navItems: NavItem[] = [
   { label: 'Anasayfa', href: '/home' },
@@ -17,7 +18,12 @@ export default function Navbar() {
         
         {/* LOGO */}
         <Link href="/" className="text-2xl font-bold text-slate-900 tracking-tight">
-          MEKA<span className="text-blue-600">SİGORTA</span>
+         <Image
+          src={"/assets/images/logotest.png"}
+          alt='logo'
+          width={150}
+          height={150}
+         />
         </Link>
 
         {/* MASAÜSTÜ NAVİGASYON */}
