@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsapp from "@/components/Common/FloatingWhatsapp";
 import { Toaster } from "sonner";
-
+import LoadingScreen from "@/components/Common/LoadingScreen";
 
 
 const geistSans = Geist({
@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="tr">
       <body className={`${geistSans.variable} font-sans antialiased  min-h-screen  flex flex-col`}>
       
-        
+        <LoadingScreen/>
         {/* Navbar burada sabit */}
         <Navbar />
         
